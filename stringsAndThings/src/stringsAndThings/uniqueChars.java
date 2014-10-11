@@ -4,7 +4,7 @@ package stringsAndThings;
 
 public class uniqueChars {
 	public static void main(String[] args) {
-		String str = "India";
+		String str = "Abhishek";
 		boolean result = isUniqueChars(str);
 		System.out.println(result);
 	}
