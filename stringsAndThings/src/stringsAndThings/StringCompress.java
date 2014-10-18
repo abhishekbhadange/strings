@@ -6,7 +6,7 @@ package stringsAndThings;
 
 public class StringCompress {
 	public static void main(String[] args) {
-		String str = "abbbcccdd";
+		String str = "abb bbccccddd";
 		String result = stringCompress(str);
 		System.out.println(result);
 		String result2 = alternateCompress(str);
@@ -23,8 +23,15 @@ public class StringCompress {
 			if(str.charAt(i) == last)
 				count++;
 			else {
-				sb.append(last + "" + count);
-				last = str.charAt(i);
+				if(str.charAt(i)==' ') {
+					sb.append(last + "" + count);
+					sb.append(' ');
+					last = str.charAt(++i);
+				}
+				else {
+					sb.append(last + "" + count);
+					last = str.charAt(i);
+				}
 				count = 1;
 			}
 		}
@@ -36,6 +43,11 @@ public class StringCompress {
 		char last = str.charAt(0);
 		int count = 1;
 		for(int i = 1; i < str.length(); i++) {
+			if(str.charAt(i) == ' ') {
+				size++;
+				last = str.charAt(i);
+				continue;
+			}
 			if(str.charAt(i) == last)
 				count++;
 			else {
@@ -59,8 +71,15 @@ public class StringCompress {
 			if(str.charAt(i) == last)
 				count++;
 			else {
-				index = insertIntoFinal(finalStr, index, last, count);
-				last = str.charAt(i);
+				if(str.charAt(i) == ' ') {
+					index = insertIntoFinal(finalStr, index, last, count);
+					index = insertIntoFinal(finalStr, index, ' ', count);
+					last = str.charAt(++i);
+				}
+				else {
+					index = insertIntoFinal(finalStr, index, last, count);
+					last = str.charAt(i);
+				}
 				count = 1;
 			}
 		}
@@ -70,10 +89,12 @@ public class StringCompress {
 	public static int insertIntoFinal(char[] finalStr, int index, char c, int count) {
 		finalStr[index] = c;
 		index++;
-		char[] countArr = String.valueOf(count).toCharArray();
-		for(char ch : countArr) {
-			finalStr[index] = ch;
-			index++;
+		if(c != ' ') {
+			char[] countArr = String.valueOf(count).toCharArray();
+			for(char ch : countArr) {
+				finalStr[index] = ch;
+				index++;
+			}
 		}
 		return index;
 	}
