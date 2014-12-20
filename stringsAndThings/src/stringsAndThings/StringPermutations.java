@@ -14,7 +14,7 @@ public class StringPermutations {
 			for(int j = i; j <= n; j++) {
 				str = swap(str.toCharArray(), i, j);
 				stringPermutations(str, i + 1, n);
-				str = swap(str.toCharArray(), i, j);
+				str = swap(str.toCharArray(), i, j);	// backtrack
 			}
 		}
 	}
