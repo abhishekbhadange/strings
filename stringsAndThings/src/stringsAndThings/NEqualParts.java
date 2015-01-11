@@ -17,6 +17,5 @@ public class NEqualParts {
 		}
 		else
 			System.out.println("Invalid Input: String size is not divisible by " + parts);
-			return;
 	}
 }	
